@@ -170,7 +170,7 @@ public class LineAcceptanceTest extends AcceptanceTest {
         createRequest("/stations", 왕십리역);
         ExtractableResponse<Response> 분당선생성 = createRequest("/lines", 분당선_RED);
         ExtractableResponse<Response> 신분당선생성 = createRequest("/lines", 신분당선_YELLOW);
-        ExtractableResponse<Response> response = findAllRequest("/lines");
+        ExtractableResponse<Response> response = findRequest("/lines");
         List<Long> expectedLineIds = expectedLineIdsList(Arrays.asList(분당선생성, 신분당선생성));
         List<Long> resultLineIds = resultLineIdsList(response);
 
@@ -204,7 +204,7 @@ public class LineAcceptanceTest extends AcceptanceTest {
         createRequest("/stations", 잠실역);
         createRequest("/stations", 왕십리역);
         ExtractableResponse<Response> 분당선생성 = createRequest("/lines", 분당선_RED);
-        ExtractableResponse<Response> response = findByLineIdRequest("1");
+        ExtractableResponse<Response> response = findRequest("/lines/1");
         Long expectedLineId = Long.parseLong(분당선생성.header("Location").split("/")[2]);
         LineStationsResponse result = response.as(LineStationsResponse.class);
 
@@ -232,8 +232,8 @@ public class LineAcceptanceTest extends AcceptanceTest {
         createRequest("/stations", 잠실역);
         createRequest("/stations", 왕십리역);
         createRequest("/lines", 분당선_RED);
-        ExtractableResponse<Response> expectedResponse = updateLineRequest("1", 신분당선_YELLOW);
-        ExtractableResponse<Response> updatedResponse = findByLineIdRequest("1");
+        ExtractableResponse<Response> expectedResponse = updateRequest("lines/1", 신분당선_YELLOW);
+        ExtractableResponse<Response> updatedResponse = findRequest("/lines/1");
 
         // then
         assertThat(expectedResponse.statusCode()).isEqualTo(HttpStatus.OK.value());
@@ -255,7 +255,7 @@ public class LineAcceptanceTest extends AcceptanceTest {
         // when
         createRequest("/lines", 분당선_RED);
         createRequest("/lines", 신분당선_YELLOW);
-        ExtractableResponse<Response> response = updateLineRequest("1", new LineUpdateRequest("신분당선", "bg-yellow-600"));
+        ExtractableResponse<Response> response = updateRequest("/lines/1", new LineUpdateRequest("신분당선", "bg-yellow-600"));
 
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());

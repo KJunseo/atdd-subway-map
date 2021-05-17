@@ -62,7 +62,7 @@ public class StationAcceptanceTest extends AcceptanceTest {
         // when
         ExtractableResponse<Response> 강남역생성 = createRequest("/stations", 강남역);
         ExtractableResponse<Response> 역삼역생성 = createRequest("/stations", 역삼역);
-        ExtractableResponse<Response> response = findAllRequest("/stations");
+        ExtractableResponse<Response> response = findRequest("/stations");
         List<Long> expectedStationIds = expectedStationIdsList(Arrays.asList(강남역생성, 역삼역생성));
         List<Long> resultStationIds = resultStationIdsList(response);
 

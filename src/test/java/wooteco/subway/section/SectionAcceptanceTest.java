@@ -201,7 +201,7 @@ public class SectionAcceptanceTest extends AcceptanceTest {
         createRequest("/lines/" + 분당선Id + "/sections", 뚝섬_왕십리);
         String uri = "/lines/" + 분당선Id + "/sections?stationId=" + 왕십리역Id;
         ExtractableResponse<Response> response = deleteRequest(uri);
-        ExtractableResponse<Response> 분당선역조회 = findByLineIdRequest(Long.toString(분당선Id));
+        ExtractableResponse<Response> 분당선역조회 = findRequest("/lines/" + 분당선Id);
 
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
@@ -233,7 +233,7 @@ public class SectionAcceptanceTest extends AcceptanceTest {
         createRequest("/lines/" + 분당선Id + "/sections", 뚝섬_왕십리);
         String uri = "/lines/" + 분당선Id + "/sections?stationId=" + 강남역Id;
         ExtractableResponse<Response> response = deleteRequest(uri);
-        ExtractableResponse<Response> 분당선역조회 = findByLineIdRequest(Long.toString(분당선Id));
+        ExtractableResponse<Response> 분당선역조회 = findRequest("/lines/" + 분당선Id);
 
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
@@ -265,7 +265,7 @@ public class SectionAcceptanceTest extends AcceptanceTest {
         createRequest("/lines/" + 분당선Id + "/sections", 뚝섬_왕십리);
         String uri = "/lines/" + 분당선Id + "/sections?stationId=" + 잠실역Id;
         ExtractableResponse<Response> response = deleteRequest(uri);
-        ExtractableResponse<Response> 분당선역조회 = findByLineIdRequest(Long.toString(분당선Id));
+        ExtractableResponse<Response> 분당선역조회 = findRequest("/lines/" + 분당선Id);
 
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());

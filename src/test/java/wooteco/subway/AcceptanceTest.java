@@ -33,10 +33,20 @@ public class AcceptanceTest {
                 .extract();
     }
 
-    public static ExtractableResponse<Response> findAllRequest(String path) {
+    public static ExtractableResponse<Response> findRequest(String path) {
         return RestAssured.given().log().all()
                 .when()
                 .get(path)
+                .then().log().all()
+                .extract();
+    }
+
+    public static ExtractableResponse<Response> updateRequest(String path, LineUpdateRequest body) {
+        return RestAssured.given().log().all()
+                .body(body)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .when()
+                .put(path)
                 .then().log().all()
                 .extract();
     }
@@ -45,24 +55,6 @@ public class AcceptanceTest {
         return RestAssured.given().log().all()
                 .when()
                 .delete(uri)
-                .then().log().all()
-                .extract();
-    }
-
-    public static ExtractableResponse<Response> findByLineIdRequest(String id) {
-        return RestAssured.given().log().all()
-                .when()
-                .get("/lines/" + id)
-                .then().log().all()
-                .extract();
-    }
-
-    public static ExtractableResponse<Response> updateLineRequest(String id, LineUpdateRequest body) {
-        return RestAssured.given().log().all()
-                .body(body)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when()
-                .put("/lines/" + id)
                 .then().log().all()
                 .extract();
     }
